@@ -19,5 +19,20 @@ func iniHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r.Method)
 	fmt.Println(r.PostForm)
 
-	NewIni("template.ini", "newIni")
+	exe := r.PostFormValue("exe")
+	template := r.PostFormValue("template")
+	ini := NewTempIni(template)
+	if err := Exec(exe, ini); err != nil {
+		fmt.Println(err)
+		return
+	}
+}
+
+func NewTempIni(template string) string {
+	return template
+}
+
+func Exec(exe string, ini string) error {
+
+	return nil
 }
